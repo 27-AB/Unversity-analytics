@@ -1,7 +1,8 @@
-const { getActiveProjects, getProjectsFunding  } = require("./service/projectService");
+const { getActiveProjects, getProjectsFunding , getProjectsReport } = require("./service/projectService");
 const activeProjects = getActiveProjects("active");
 const completedProjects = getActiveProjects("completed");
 
-
-console.log(getProjectsFunding(activeProjects));
-console.log(getProjectsFunding(completedProjects));
+const matchingProjects = getProjectsReport("cancelled");
+//console.log(getProjectsFunding(activeProjects));
+//console.log(getProjectsFunding(completedProjects));
+console.log(matchingProjects);
