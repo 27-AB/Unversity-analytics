@@ -18,4 +18,4 @@ console.log(getProjectsByName(projects, "xyz")); */
 
 console.log(getProjectsByDepartment(projects, "engineering"));
 console.log(getProjectsByDepartment(projects, "ENGINEERING"));
-console.log(getProjectsByDepartment(projects, "MATHS"));
+console.log(getProjectsByDepartment(projects, "xyz"));
