@@ -10,8 +10,14 @@ function getProjectsFunding(projects){
 }
 
 function getProjectsReport(status){
-    if(status !== "active" || status !== "completed"){
-        return "Invalid inputs";
+
+    if(typeof status !== "string"){
+        return  { error: "Status must be string"};
+    }
+
+    status = status.toLowerCase();
+    if(status !== "active" && status !== "completed"){
+        return "Invalid status";
     }
     
     const matchingProjects = getActiveProjects(status);
@@ -34,4 +40,12 @@ function getProjectsReport(status){
         projectNames
     }
 }
-module.exports = { getActiveProjects,  getProjectsFunding, getProjectsReport}; 
+function getProjectsByName(projects, keyword){
+    return projects.filter(project => project.name.toLowerCase().includes(keyword.toLowerCase()))
+}
+function getProjectsByDepartment(projects, college){
+    return projects.filter(project => project.college.toLowerCase() === college.toLowerCase())
+}
+
+module.exports = { getActiveProjects,  getProjectsFunding, 
+    getProjectsReport, getProjectsByName,getProjectsByDepartment}; 
