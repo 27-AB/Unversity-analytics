@@ -16,6 +16,9 @@ console.log(getProjectsReport(123)); */
 console.log(getProjectsByName(projects, "smart"));
 console.log(getProjectsByName(projects, "xyz")); */
 
-console.log(getProjectsByDepartment(projects, "engineering"));
+/*console.log(getProjectsByDepartment(projects, "engineering"));
 console.log(getProjectsByDepartment(projects, "ENGINEERING"));
 console.log(getProjectsByDepartment(projects, "xyz"));
+*/
+
+console.log(getProjectsReport("completed"));
