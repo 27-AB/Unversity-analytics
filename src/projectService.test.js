@@ -29,4 +29,29 @@ test("return correct funding number for completed projects", () => {
     const result = getProjectsReport("completed");
 
     assert.deepStrictEqual(result.funding,  30000);
-})
+});
+
+test("return all projects when the keyword is empty", () => {
+    const result = getProjectsByName(projects, "");
+
+    assert.strictEqual(result.length, projects.length);
+});
+
+test("return an error for keyword null", () => {
+const result = getProjectsByName(projects, null);
+assert.deepStrictEqual(result, {error: "Keyword must be a string"});
+});
+
+test("returns an error for an invalid status", () => {
+    const result = getProjectsReport("cancelled");
+
+    assert.deepStrictEqual(result, {error: "Invalid status"});
+});
+
+test("returns an error when status is not a string", () => {
+    const result = getProjectsReport(null);
+
+    assert.deepStrictEqual(result, {
+        error: "Status must be string"
+    });
+});

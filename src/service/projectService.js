@@ -17,7 +17,7 @@ function getProjectsReport(status){
 
     status = status.toLowerCase();
     if(status !== "active" && status !== "completed"){
-        return "Invalid status";
+        return {error: "Invalid status"};
     }
     
     const matchingProjects = getActiveProjects(status);
@@ -41,6 +41,9 @@ function getProjectsReport(status){
     }
 }
 function getProjectsByName(projects, keyword){
+    if(typeof keyword !== "string"){
+        return {error: "Keyword must be a string"};
+    }
     return projects.filter(project => project.name.toLowerCase().includes(keyword.toLowerCase()))
 }
 function getProjectsByDepartment(projects, college){
