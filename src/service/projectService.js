@@ -59,7 +59,7 @@ function getProjectsByDepartment(projects, college){
     return projects.filter(project => project.college.toLowerCase() === college)
 }
 
-function getCollegefunding(projects, college){
+function getCollegeFunding(projects, college){
     const selected = getProjectsByDepartment(projects, college);
     if(!Array.isArray(selected)){
         return selected;
@@ -68,4 +68,4 @@ function getCollegefunding(projects, college){
    return getProjectsFunding(selected);
 }
 module.exports = { getActiveProjects,  getProjectsFunding, 
-    getProjectsReport, getProjectsByName,getProjectsByDepartment, getCollegefunding}; 
+    getProjectsReport, getProjectsByName,getProjectsByDepartment, getCollegeFunding}; 

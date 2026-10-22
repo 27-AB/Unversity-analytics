@@ -1,7 +1,7 @@
 const test = require("node:test"); // loading the or requireing the test module from node 
 const assert =require("node:assert"); // requiring assert module from node 
 const  projects  = require("./data/projects");  //fetching project from this path
-const { getProjectsByName, getProjectsByDepartment } = require("./service/projectService"); //getting the getProjectName from the defined path
+const { getProjectsByName, getProjectsByDepartment, getCollegeFunding } = require("./service/projectService"); //getting the getProjectName from the defined path
 const { getProjectsReport } = require("./service/projectService");
 
 test("returns an empty array when no project matches", () => {  // this one test case 
@@ -86,3 +86,10 @@ test("accepts uppercase college name", () => {
  assert.ok(Array.isArray(result));
  assert.ok(result.every(project => project.college === "Agriculture"));
 });
+
+test("return funding of selected college", () =>{
+ const result = getCollegeFunding(projects, "Engineering");
+
+ assert.strictEqual(result, 120000)
+});
+
