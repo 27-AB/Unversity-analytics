@@ -47,8 +47,25 @@ function getProjectsByName(projects, keyword){
     return projects.filter(project => project.name.toLowerCase().includes(keyword.toLowerCase()))
 }
 function getProjectsByDepartment(projects, college){
-    return projects.filter(project => project.college.toLowerCase() === college.toLowerCase())
+    
+    if(typeof college !== "string"){
+        return {error: "College must be a string"};
+    }
+    college = college.toLowerCase();
+    if(college !== "engineering" && college !== "agriculture"){
+        return {error: "Unknown college"};
+    }
+    
+    return projects.filter(project => project.college.toLowerCase() === college)
 }
 
+function getCollegefunding(projects, college){
+    const selected = getProjectsByDepartment(projects, college);
+    if(!Array.isArray(selected)){
+        return selected;
+    }
+
+   return getProjectsFunding(selected);
+}
 module.exports = { getActiveProjects,  getProjectsFunding, 
-    getProjectsReport, getProjectsByName,getProjectsByDepartment}; 
+    getProjectsReport, getProjectsByName,getProjectsByDepartment, getCollegefunding}; 

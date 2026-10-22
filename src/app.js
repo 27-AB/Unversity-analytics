@@ -21,4 +21,5 @@ console.log(getProjectsByDepartment(projects, "ENGINEERING"));
 console.log(getProjectsByDepartment(projects, "xyz"));
 */
 
-console.log(getProjectsReport("completed"));
+//console.log(getProjectsReport("completed"));
+console.log(getProjectsByDepartment(projects, "engineering").length);

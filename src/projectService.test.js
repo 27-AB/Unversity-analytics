@@ -1,7 +1,7 @@
 const test = require("node:test"); // loading the or requireing the test module from node 
 const assert =require("node:assert"); // requiring assert module from node 
 const  projects  = require("./data/projects");  //fetching project from this path
-const { getProjectsByName } = require("./service/projectService"); //getting the getProjectName from the defined path
+const { getProjectsByName, getProjectsByDepartment } = require("./service/projectService"); //getting the getProjectName from the defined path
 const { getProjectsReport } = require("./service/projectService");
 
 test("returns an empty array when no project matches", () => {  // this one test case 
@@ -54,4 +54,35 @@ test("returns an error when status is not a string", () => {
     assert.deepStrictEqual(result, {
         error: "Status must be string"
     });
+});
+
+test("return correct college", () => {
+    const result = getProjectsByDepartment(projects, "engineering");
+    assert.strictEqual(result.length, 2);
+
+    result.forEach(project => {
+        assert.strictEqual(project.college, "Engineering");
+    });
+});
+
+test("return error for unknown college", () => {
+    const result = getProjectsByDepartment(projects, "Medicine");
+    assert.deepStrictEqual(result, {
+        error: "Unknown college"
+    });
+});
+
+test("return an error when the college is null", () => {
+    const result = getProjectsByDepartment(projects, null);
+
+    assert.deepStrictEqual(result, {
+        error: "College must be a string"
+    });
+});
+
+test("accepts uppercase college name", () => {
+ const result = getProjectsByDepartment(projects, "AGRICULTURE");
+
+ assert.ok(Array.isArray(result));
+ assert.ok(result.every(project => project.college === "Agriculture"));
 });
