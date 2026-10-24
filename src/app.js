@@ -1,4 +1,4 @@
-const { getActiveProjects, getProjectsFunding , getProjectsReport, getProjectsByName, getProjectsByDepartment } = require("./service/projectService");
+const { getActiveProjects, getProjectsFunding , getProjectsReport, getProjectsByName, getProjectsByDepartment, getCollegeReport } = require("./service/projectService");
 const  projects  = require("./data/projects");
 const activeProjects = getActiveProjects("active");
 const completedProjects = getActiveProjects("completed");
@@ -22,4 +22,8 @@ console.log(getProjectsByDepartment(projects, "xyz"));
 */
 
 //console.log(getProjectsReport("completed"));
-console.log(getProjectsByDepartment(projects, "engineering").length);
+//console.log(getProjectsByDepartment(projects, "engineering").length);
+//console.log(getCollegeReport(projects, "Medicine"));
+console.log(getProjectsByDepartment(projects, null));
+console.log(getProjectsByDepartment(projects, "Medicine"));
+console.log(getProjectsByDepartment(projects, undefined));

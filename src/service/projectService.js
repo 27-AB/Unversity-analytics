@@ -67,5 +67,25 @@ function getCollegeFunding(projects, college){
 
    return getProjectsFunding(selected);
 }
+
+function getCollegeReport(projects, college){
+    const collegeProjects = getProjectsByDepartment(projects, college);
+    if(!Array.isArray(collegeProjects)){
+        return collegeProjects;
+    }
+    const collegeFunding = getProjectsFunding(collegeProjects);
+    const matching = collegeProjects.length;
+    
+    return {
+        college, 
+        matching,
+        collegeFunding
+    };
+};
 module.exports = { getActiveProjects,  getProjectsFunding, 
-    getProjectsReport, getProjectsByName,getProjectsByDepartment, getCollegeFunding}; 
+    getProjectsReport, getProjectsByName,
+    getProjectsByDepartment, getCollegeFunding,
+    getCollegeReport
+
+    }; 
+

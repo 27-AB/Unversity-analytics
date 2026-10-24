@@ -1,8 +1,9 @@
 const test = require("node:test"); // loading the or requireing the test module from node 
 const assert =require("node:assert"); // requiring assert module from node 
 const  projects  = require("./data/projects");  //fetching project from this path
-const { getProjectsByName, getProjectsByDepartment, getCollegeFunding } = require("./service/projectService"); //getting the getProjectName from the defined path
+const { getProjectsByName, getProjectsByDepartment, getCollegeFunding, getCollegeReport } = require("./service/projectService"); //getting the getProjectName from the defined path
 const { getProjectsReport } = require("./service/projectService");
+const { error } = require("node:console");
 
 test("returns an empty array when no project matches", () => {  // this one test case 
     const result = getProjectsByName(projects, "xyz");
@@ -93,3 +94,24 @@ test("return funding of selected college", () =>{
  assert.strictEqual(result, 120000)
 });
 
+test("return info of college project", () => {
+    const result = getCollegeReport(projects, "Engineering");
+    assert.deepStrictEqual(result, {
+         college: 'Engineering', matching: 2, collegeFunding: 120000 
+    });
+})
+
+test("return unknown college when college is not found", () => {
+    const result = getCollegeReport(projects, "Medicine");
+    assert.deepStrictEqual(result, {
+        error: "Unknown college"
+    })
+})
+
+test("return in valid typof when the college typeof is different from string", () => {
+    const result = getCollegeReport(projects, null);
+
+    assert.deepStrictEqual(result, {
+        error: "College must be a string"
+    });
+})
