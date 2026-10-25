@@ -82,10 +82,18 @@ function getCollegeReport(projects, college){
         collegeFunding
     };
 };
+
+async function getProjectsAsync(projects){
+    if(!Array.isArray(projects)){
+        throw new Error("Projects must be an array");
+    }
+    return projects;
+}
 module.exports = { getActiveProjects,  getProjectsFunding, 
     getProjectsReport, getProjectsByName,
     getProjectsByDepartment, getCollegeFunding,
-    getCollegeReport
+    getCollegeReport,
+    getProjectsAsync
 
     }; 
 

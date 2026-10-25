@@ -1,9 +1,11 @@
 const test = require("node:test"); // loading the or requireing the test module from node 
 const assert =require("node:assert"); // requiring assert module from node 
 const  projects  = require("./data/projects");  //fetching project from this path
-const { getProjectsByName, getProjectsByDepartment, getCollegeFunding, getCollegeReport } = require("./service/projectService"); //getting the getProjectName from the defined path
+const { getProjectsByName, getProjectsByDepartment,
+     getCollegeFunding, getCollegeReport,getProjectsAsync } = require("./service/projectService"); //getting the getProjectName from the defined path
 const { getProjectsReport } = require("./service/projectService");
 const { error } = require("node:console");
+const { promises } = require("node:dns");
 
 test("returns an empty array when no project matches", () => {  // this one test case 
     const result = getProjectsByName(projects, "xyz");
@@ -115,3 +117,20 @@ test("return in valid typof when the college typeof is different from string", (
         error: "College must be a string"
     });
 })
+
+test("return promise ",() => {
+    const result = getProjectsAsync(projects);
+
+    assert.ok(result instanceof Promise);
+});
+
+test("return the projects when the async is await", async () => {
+    const result = await getProjectsAsync(projects);
+
+    assert.deepStrictEqual(result, projects);
+});
+
+test("reject when the projects is not array", async () => {
+   await assert.rejects(getProjectsAsync(null),
+   {message: "Projects must be an array"});
+});
